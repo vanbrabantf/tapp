@@ -20,3 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', 'AdminController@index')->name('admin');
+Route::get('/unapproved', 'UnapprovedUserController@index')->name('unapproved');
+Route::get('/approved', 'ApprovedUserController@index')->name('approved');

@@ -1,0 +1,51 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: user
+        uid: 1000
+      context: ./
+      dockerfile: docker/Dockerfile
+    image: tapp
+    container_name: tapp-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - tapp
+
+  db:
+    image: mysql:5.7
+    container_name: tapp-db
+    restart: unless-stopped
+    ports:
+      - 3309:3306
+    environment:
+      MYSQL_DATABASE: homestead
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_PASSWORD: secret
+      MYSQL_USER: homestead
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - tapp
+
+  nginx:
+    image: nginx:alpine
+    container_name: tapp-nginx
+    restart: unless-stopped
+    ports:
+      - 8003:80
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d/
+    networks:
+      - tapp
+
+networks:
+  tapp:
+    driver: bridge

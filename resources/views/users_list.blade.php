@@ -24,6 +24,23 @@
                                 {{ __('Approved page') }}
                             </a>
                         </nav>
+
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">name</th>
+                                <th scope="col">email </th>
+                            </thead>
+                            <tbody>
+                            @foreach($users as $user)
+                                <tr>
+                                    <td> {{$user->name}} </td>
+                                    <td> {{$user->email}} </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
             </div>

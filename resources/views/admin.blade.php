@@ -24,6 +24,29 @@
                                 {{ __('Approved page') }}
                             </a>
                         </nav>
+
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col">name</th>
+                                    <th scope="col">email </th>
+                                    <th scope="col">Authorize</th></tr>
+                                </thead>
+                                <tbody>
+                                @foreach($users as $user)
+                                    <tr>
+                                        <td> {{$user->name}} </td>
+                                        <td> {{$user->email}} </td>
+                                        @if ($user->approved_at !== null)
+                                            <td> <button type="button" class="btn btn-danger">Unauthorize</button> </td>
+                                        @else
+                                            <td> <button type="button" class="btn btn-success">Authorize</button> </td>
+                                        @endif
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+
                     </div>
                 </div>
             </div>

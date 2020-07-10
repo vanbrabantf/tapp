@@ -23,3 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', 'AdminController@index')->name('admin');
 Route::get('/unapproved', 'UnapprovedUserController@index')->name('unapproved');
 Route::get('/approved', 'ApprovedUserController@index')->name('approved');
+
+Route::get('/admin/unapproved/{user}', 'AdminController@unApprove')->name('unapprove_user');
+Route::get('/admin/approved/{user}', 'AdminController@approve')->name('approve_user');

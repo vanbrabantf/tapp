@@ -13,7 +13,7 @@ final class AdminController extends Controller
 
     public function __construct(UserRepository $userRepository)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'admin']);
         $this->userRepository = $userRepository;
     }
 

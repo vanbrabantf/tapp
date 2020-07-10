@@ -13,6 +13,7 @@ final class UnapprovedUserController extends Controller
 
     public function __construct(UserRepository $userRepository)
     {
+        $this->middleware(['auth']);
         $this->userRepository = $userRepository;
     }
 

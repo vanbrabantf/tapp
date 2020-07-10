@@ -67,7 +67,7 @@ final class AdminPageTest extends TestCase
 
         $user = factory(User::class)->create([
             'name' => 'Taylor Swift',
-            'approved_at' => Carbon::now()->toDateTimeString()
+            'approved_at' => Carbon::now()->toDateTimeString(),
         ]);
 
         $response = $this->get('/admin/unapproved/'.$user->id);

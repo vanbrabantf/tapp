@@ -44,4 +44,36 @@ final class AdminPageTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect('/login');
     }
+
+    public function testICanApproveUsers(): void
+    {
+        $this->createLoggedInAdmin();
+
+        $user = factory(User::class)->create([
+            'name' => 'Taylor Swift',
+            'approved_at' => null,
+        ]);
+
+        $response = $this->get('/admin/approved/'.$user->id);
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseMissing('users', ['name' => 'Taylor Swift', 'approved_at' => null]);
+    }
+
+    public function testICanUnApproveUsers(): void
+    {
+        $this->createLoggedInAdmin();
+
+        $user = factory(User::class)->create([
+            'name' => 'Taylor Swift',
+            'approved_at' => Carbon::now()->toDateTimeString()
+        ]);
+
+        $response = $this->get('/admin/unapproved/'.$user->id);
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseHas('users', ['name' => 'Taylor Swift', 'approved_at' => null]);
+    }
 }

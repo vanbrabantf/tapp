@@ -38,9 +38,9 @@
                                         <td> {{$user->name}} </td>
                                         <td> {{$user->email}} </td>
                                         @if ($user->approved_at !== null)
-                                            <td> <button type="button" class="btn btn-danger">Unauthorize</button> </td>
+                                            <td> <a href="{{ route('unapprove_user', $user->id) }}" class="btn btn-danger">Unauthorize</a> </td>
                                         @else
-                                            <td> <button type="button" class="btn btn-success">Authorize</button> </td>
+                                            <td> <a href="{{ route('approve_user', $user->id) }}"class="btn btn-success">Authorize</button> </td>
                                         @endif
                                     </tr>
                                 @endforeach
